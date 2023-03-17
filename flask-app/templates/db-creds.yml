@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  POSTGRES_DATABASE: Zmxhc2stc2FtcGxlLWFwcA==
+  POSTGRES_HOST: ZGItcG9zdGdyZXNxbC5kYi5zdmMuY2x1c3Rlci5sb2NhbA==
+  POSTGRES_PASSWORD: cGFzc3dvcmQ=
+  POSTGRES_PORT: NTQzMg==
+  POSTGRES_USERNAME: Zmxhc2stc2FtcGxlLWFwcA==
+kind: Secret
+metadata:
+  name: db-creds
