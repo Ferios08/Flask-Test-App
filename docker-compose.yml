@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: flask-sample-app
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATABASE: flask-sample-app
+    ports:
+      - '5432:5432'
+  api:
+    build: .
+    environment:
+      POSTGRES_USERNAME: flask-sample-app
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: flask-sample-app
+    command: "run --host=0.0.0.0 --port 8080"
+    ports:
+      - 8080:8080
+  migrate:
+    build: .
+    environment:
+      POSTGRES_USERNAME: flask-sample-app
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: flask-sample-app
+    command: "db upgrade"

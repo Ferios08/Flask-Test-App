@@ -1,0 +1,18 @@
+stages:
+    - Build
+#-------------------------------------------------------------------------------        
+Building Docker Image: #JOB
+  stage: Build
+  image: docker
+  tags:
+    - gitlab-org-docker
+  services:
+    - docker:dind # Let docker engine work inside a docker image
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t registry.gitlab.com/ferios08/amande .
+    - docker push registry.gitlab.com/ferios08/amande
+    - docker tag registry.gitlab.com/ferios08/amande:latest registry.gitlab.com/ferios08/amande:$CI_COMMIT_SHORT_SHA
+    - docker push registry.gitlab.com/ferios08/amande:$CI_COMMIT_SHORT_SHA
+    
